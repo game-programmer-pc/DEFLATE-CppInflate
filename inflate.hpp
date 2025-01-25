@@ -19,7 +19,6 @@
 #define INFLATE_INVALID_CODE_LENGTH                 ((1 << 31) | (1 << 29) | (300 << 16) | (12))
 #define INFLATE_FINAL_BLOCK_MISPLACED               ((1 << 31) | (1 << 29) | (300 << 16) | (13))
 #define INFLATE_DATA_INTEGRITY_FAIL                 ((1 << 31) | (1 << 29) | (300 << 16) | (14))
-#define INFLATE_CODE_AMBIGUITY						((1 << 31) | (1 << 29) | (300 << 16) | (15))
 
 #define CODEC_NAMESPACE_BEGIN namespace codec {
 #define CODEC_NAMESPACE_END }
