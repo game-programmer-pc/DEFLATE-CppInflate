@@ -505,52 +505,6 @@ DecodeFixedBlock(
 }
 
 static
-std::uint32_t
-Adler32ComputeChecksum(
-	const std::vector<std::uint8_t>& istream
-) {
-	std::uint32_t s1{ 1 };
-	std::uint32_t s2{ 0 };
-	for (std::size_t i = 0; i < istream.size(); i++)
-	{
-		s1 = (s1 + istream[i]) % ADLER32_MODULO;
-		s2 = (s2 + s1) % ADLER32_MODULO;
-	}
-
-	return (s2 << 16) | s1;
-}
-
-static
-std::int32_t
-Adler32CompareChecksum(
-	datastream&						 dstream,
-	const std::vector<std::uint8_t>& istream
-) {
-	std::int32_t result = INFLATE_OK;
-	result = AlignPointer(dstream);
-	if (result != INFLATE_OK) return result;
-
-	const std::uintptr_t index = dstream.datastream_ptr >> 3;
-
-	if (index + 4 != dstream.datastream_size)
-	{
-		return INFLATE_FINAL_BLOCK_MISPLACED;
-	}
-	else
-	{
-		const std::uint32_t checksum = EndianSwap(*(reinterpret_cast<const std::uint32_t*>(dstream.data + index)));
-		if (checksum != Adler32ComputeChecksum(istream))
-		{
-			return INFLATE_DATA_INTEGRITY_FAIL;
-		}
-		else
-		{
-			return result;
-		}
-	}
-}
-
-static
 std::int32_t
 ParseAndGetUncompressedData(
 	datastream&				   dstream,
@@ -1017,8 +971,7 @@ InflateDatastream(
 			break;
 		}
 	} while (bfinal != true);
-	result = Adler32CompareChecksum(dstream, istream);
-	if (result != INFLATE_OK) return result;
+	result = INFLATE_OK;
 	inflated.swap(istream);
 	return result;
 }
