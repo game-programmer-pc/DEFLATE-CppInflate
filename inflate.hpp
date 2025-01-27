@@ -22,12 +22,12 @@
 
 std::int32_t
 InflateDatastream(
-	const std::uint8_t* const  deflated,
+	const std::uint8_t* const  	   deflated,
 	const std::size_t		   deflated_size,
-	const std::uint8_t* const  dictionary,
+	const std::uint8_t* const  	   dictionary,
 	const std::size_t		   dictionary_size,
 	const std::size_t		   window_size,
-	std::vector<std::uint8_t>& inflated
+	std::vector<std::uint8_t>&         inflated
 );
 
 
