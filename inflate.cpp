@@ -7,17 +7,17 @@
 #include <algorithm>
 #include "inflate.hpp"
 
-#define INFLATE_EOF											    ((0 << 31) | (1 << 29) | (300 << 16) | (2))
-#define INFLATE_FIXED_LITERAL_LENGTH_SYMBOL_MAX_BIT_LENGTH		(9)
-#define INFLATE_FIXED_LITERAL_LENGTH_SYMBOL_MIN_BIT_LENGTH		(7)
-#define INFLATE_FIXED_DISTANCE_BIT_LENGTH						(5)
-#define INFLATE_UNCOMPRESSED									(0)
-#define INFLATE_FIXED											(1)
-#define INFLATE_DYNAMIC											(2)
-#define INFLATE_RESERVED										(3)
-#define INFLATE_EOB												(256)
+#define INFLATE_EOF						((0 << 31) | (1 << 29) | (300 << 16) | (2))
+#define INFLATE_FIXED_LITERAL_LENGTH_SYMBOL_MAX_BIT_LENGTH	(9)
+#define INFLATE_FIXED_LITERAL_LENGTH_SYMBOL_MIN_BIT_LENGTH	(7)
+#define INFLATE_FIXED_DISTANCE_BIT_LENGTH			(5)
+#define INFLATE_UNCOMPRESSED					(0)
+#define INFLATE_FIXED						(1)
+#define INFLATE_DYNAMIC						(2)
+#define INFLATE_RESERVED					(3)
+#define INFLATE_EOB						(256)
 
-#define ADLER32_MODULO											(65521)
+#define ADLER32_MODULO						(65521)
 
 
 
