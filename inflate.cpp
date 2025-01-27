@@ -23,22 +23,22 @@
 
 struct datastream {
 	constexpr datastream(const std::uint8_t* pointer, const std::size_t size) noexcept : data(pointer), datastream_size(size), datastream_ptr(0) {}
-	const std::uint8_t* const data;
+	const std::uint8_t* const 	  data;
 	const std::size_t		  datastream_size;
 	std::uintptr_t			  datastream_ptr;
 };
 
 struct sliding_window {
 	sliding_window(std::uint8_t* pointer, const std::size_t size) noexcept : window(pointer), window_size(size), window_ptr(0), window_count(0) {}
-	std::unique_ptr<std::uint8_t[]>		  window;
+	std::unique_ptr<std::uint8_t[]>		  		  window;
 	const std::size_t					  window_size;
 	std::uintptr_t						  window_ptr;
-	std::size_t							  window_count;
+	std::size_t					          window_count;
 };
 
 struct dynamic_alphabet {
 	constexpr dynamic_alphabet() noexcept : blen(0) {}
-	std::size_t blen;
+	std::size_t 		   blen;
 	std::vector<std::uint32_t> symbols;
 	std::vector<std::uint32_t> codes;
 	bool operator<(const dynamic_alphabet& operand) const noexcept {
@@ -94,7 +94,7 @@ GetDuplicatedStringFromSlidingWindow(
 	sliding_window&					window,
 	const std::size_t				length,
 	const std::size_t				distance,
-	std::vector<std::uint8_t>&		duplicated_string
+	std::vector<std::uint8_t>&		        duplicated_string
 ) {
 	if (distance > window.window_size)
 	{
@@ -367,9 +367,9 @@ GetFixedLiteralLengthSymbol(
 static
 std::int32_t
 ParseLiteralLengthSymbol(
-	datastream&				   dstream,
+	datastream&		           dstream,
 	sliding_window&			   window,
-	std::vector<std::uint8_t>& istream,
+	std::vector<std::uint8_t>&         istream,
 	const std::uint32_t		   symbol,
 	std::size_t&			   length
 ) {
@@ -462,8 +462,8 @@ static
 std::int32_t
 DecodeFixedBlock(
 	datastream&				   dstream,
-	sliding_window&			   window,
-	std::vector<std::uint8_t>& istream
+	sliding_window&			           window,
+	std::vector<std::uint8_t>&                 istream
 ) {
 	std::uint32_t literal_length_symbol = 0;
 	std::size_t length;
@@ -554,7 +554,7 @@ static
 std::int32_t
 ParseAndGetUncompressedData(
 	datastream&				   dstream,
-	std::vector<std::uint8_t>& inflated
+	std::vector<std::uint8_t>&                 inflated
 ) {
 	std::int32_t result = INFLATE_OK;
 	result = AlignPointer(dstream);
@@ -591,9 +591,9 @@ static
 std::int32_t
 ParseDynamicHeader(
 	datastream&				dstream,
-	std::uint32_t&			hlit,
-	std::uint32_t&			hdist,
-	std::uint32_t&			hclen
+	std::uint32_t&			        hlit,
+	std::uint32_t&			        hdist,
+	std::uint32_t&			        hclen
 ) {
 	std::int32_t result = INFLATE_OK;
 	std::array<std::uint8_t, 5> bits;
